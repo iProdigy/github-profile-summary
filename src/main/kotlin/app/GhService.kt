@@ -1,5 +1,6 @@
 package app
 
+import app.util.ColorUtil
 import io.javalin.embeddedserver.jetty.websocket.WsSession
 import org.eclipse.egit.github.core.client.GitHubClient
 import org.eclipse.egit.github.core.service.CommitService
@@ -77,9 +78,8 @@ object GhService {
                 val yaml = Yaml().load(data) as Map<String, Map<String, Any>>
                 yaml.forEach({ lang, info ->
                     val color = info["color"]
-                    if (color != null && color is String && color.length == 7 && color.startsWith('#')) {
-                        colorsByLanguage[lang] = color
-                    }
+                    if (color != null && color is String && color.length == 7 && color.startsWith('#'))
+                        colorsByLanguage[lang] = ColorUtil.customizeHex(color)
                 })
 
                 if (colorsByLanguage.isEmpty())
