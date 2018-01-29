@@ -78,7 +78,7 @@ object GhService {
                 val yaml = Yaml().load(data) as Map<String, Map<String, Any>>
                 yaml.forEach({ lang, info ->
                     val color = info["color"]
-                    if (color != null && color is String && color.length == 7 && color.startsWith('#'))
+                    if (color is String)
                         colorsByLanguage[lang] = ColorUtil.customizeHex(color)
                 })
 
